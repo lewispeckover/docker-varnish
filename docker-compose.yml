@@ -1,0 +1,18 @@
+varnish:
+  image: varnish
+  command: -F -a :80 -f /etc/varnish/default.vcl -T 127.0.0.1:6082 -t 120 -p thread_pool_min=50 -p thread_pool_max=1000 -p thread_pool_timeout=120 -u varnish -g varnish -s malloc,512M
+  ports:
+    - 80
+  volumes:
+    - ./conf:/etc/varnish
+    - /var/lib/varnish
+  # add links to other containers here
+  links: []
+  external_links: []
+varnishncsa:
+  image: varnish
+  command: /usr/bin/varnishncsa -a -w /var/log/varnish/varnishncsa.log -n varnish
+  volumes:
+    - /var/log/varnish
+  volumes_from: 
+    - varnish
