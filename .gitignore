@@ -1,2 +1,2 @@
-vmods/*
-!vmods/install
+build/src
+build/dist

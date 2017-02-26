@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dumb-init /bin/sh
 
 # assume that if args begin with a "-", we want varnishd
 # if it's varnish(stat|hist|top) etc, wait for a vsm file
