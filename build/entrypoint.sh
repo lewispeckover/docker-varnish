@@ -47,7 +47,7 @@ for MODULE in ${MODULES[@]}; do
 	M=$(basename $MODULE)
 	[ -d $M/.git ] || git clone $MODULE
 	cd $M
-	git fetch && git checkout $TAG && git pull
+	git fetch && git checkout $TAG && git pull && chown -R builder .
 	[ -x ./autogen.sh ] && su-exec builder ./autogen.sh
 	[ -x ./configure ] && su-exec builder ./configure --prefix=/usr --sysconfdir=/etc --mandir=/usr/share/man --infodir=/usr/share/info --localstatedir=/var/lib
        	su-exec builder make
