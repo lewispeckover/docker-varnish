@@ -1,0 +1,20 @@
+--- 
+machine:
+  services:
+    - docker
+checkout:
+  post:
+    - ./build.sh
+compile:
+  override:
+    - docker build --rm=false -t varnish .
+test:
+  override:
+    - docker run -it --rm varnish -V
+deployment: 
+  release:
+    tag: /.*/
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker tag varnish lewispeckover/varnish:latest && docker push lewispeckover/varnish:latest
+      - docker tag varnish lewispeckover/varnish:`git describe --tags` && docker push lewispeckover/varnish:`git describe --tags`
