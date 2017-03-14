@@ -1,4 +1,1 @@
-A simple dockerfile and compose config for varnish
-
-If you want the libvmod-dynamic module, for dynamic dns based backends (ie to use Consul or similar),
-you should run ./vmod-build.sh before building the main image.
+Varnish, libvmod-dynamic and libvmod-redis
